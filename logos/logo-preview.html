@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stonera Logo Concepts</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F7F5F2;
+      color: #1A1A1A;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      color: #2C4A3E;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #6B6560;
+      font-weight: 300;
+    }
+
+    .concept {
+      margin-bottom: 56px;
+      background: white;
+      border-radius: 12px;
+      padding: 36px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .concept h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: #2C4A3E;
+      margin-bottom: 6px;
+      font-weight: 400;
+    }
+
+    .concept .description {
+      font-size: 0.9rem;
+      color: #6B6560;
+      margin-bottom: 28px;
+      max-width: 640px;
+    }
+
+    .preview-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .preview-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .preview-card {
+      border-radius: 8px;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      position: relative;
+    }
+
+    .preview-card::after {
+      content: attr(data-label);
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.45;
+      font-weight: 500;
+    }
+
+    .preview-light {
+      background: #F7F5F2;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .preview-light::after {
+      color: #1A1A1A;
+    }
+
+    .preview-dark {
+      background: #1A1A1A;
+    }
+
+    .preview-dark::after {
+      color: #F7F5F2;
+    }
+
+    .preview-card img {
+      max-width: 100%;
+      height: auto;
+      max-height: 80px;
+    }
+
+    .preview-card.avatar img {
+      max-height: 120px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: #6B6560;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Stonera Logo Concepts</h1>
+      <p>Stone fabrication in Sydney since 2001. Five directions for the visual identity.</p>
+    </header>
+
+    <!-- Concept A -->
+    <div class="concept">
+      <h2>Concept A: Modified O Wordmark</h2>
+      <p class="description">Clean serif wordmark where the letter O features a thin horizontal line through its center, evoking a stone slab cross-section. A decorative underline bar anchors the composition.</p>
+      <div class="preview-row">
+        <div class="preview-card preview-light" data-label="Light">
+          <img src="logo-concept-a.svg" alt="Stonera Logo Concept A on light background">
+        </div>
+        <div class="preview-card preview-dark" data-label="Dark">
+          <img src="logo-concept-a.svg" alt="Stonera Logo Concept A on dark background">
+        </div>
+      </div>
+    </div>
+
+    <!-- Concept B -->
+    <div class="concept">
+      <h2>Concept B: Stacked Slabs Icon + Text</h2>
+      <p class="description">Three thin horizontal slabs stacked with slight rightward offsets sit beside the wordmark, referencing stone slabs leaning on a fabrication rack.</p>
+      <div class="preview-row">
+        <div class="preview-card preview-light" data-label="Light">
+          <img src="logo-concept-b.svg" alt="Stonera Logo Concept B on light background">
+        </div>
+        <div class="preview-card preview-dark" data-label="Dark">
+          <img src="logo-concept-b.svg" alt="Stonera Logo Concept B on dark background">
+        </div>
+      </div>
+    </div>
+
+    <!-- Concept C -->
+    <div class="concept">
+      <h2>Concept C: Mitre Cut S Avatar Mark</h2>
+      <p class="description">A bold custom S with 45-degree mitre-cut terminals, set inside a circle. Designed to work as a social media avatar and brand mark at any size.</p>
+      <div class="preview-row">
+        <div class="preview-card preview-light avatar" data-label="Light">
+          <img src="logo-concept-c.svg" alt="Stonera Logo Concept C on light background">
+        </div>
+        <div class="preview-card preview-dark avatar" data-label="Dark">
+          <img src="logo-concept-c.svg" alt="Stonera Logo Concept C on dark background">
+        </div>
+      </div>
+    </div>
+
+    <!-- Concept D -->
+    <div class="concept">
+      <h2>Concept D: Stone Edge Wordmark</h2>
+      <p class="description">Every letter stroke terminates with flat 45-degree angular cuts instead of traditional serifs, giving the typography a stone-cut character. Charcoal text with a veridian green accent line.</p>
+      <div class="preview-row">
+        <div class="preview-card preview-light" data-label="Light">
+          <img src="logo-concept-d.svg" alt="Stonera Logo Concept D on light background">
+        </div>
+        <div class="preview-card preview-dark" data-label="Dark">
+          <img src="logo-concept-d.svg" alt="Stonera Logo Concept D on dark background">
+        </div>
+      </div>
+    </div>
+
+    <!-- Concept E -->
+    <div class="concept">
+      <h2>Concept E: Combined Brand Lockup</h2>
+      <p class="description">The Mitre Cut S mark paired with the full wordmark and tagline. This is the primary brand lockup for website headers, documents, and signage.</p>
+      <div class="preview-row">
+        <div class="preview-card preview-light" data-label="Light">
+          <img src="logo-concept-e.svg" alt="Stonera Logo Concept E on light background">
+        </div>
+        <div class="preview-card preview-dark" data-label="Dark">
+          <img src="logo-concept-e.svg" alt="Stonera Logo Concept E on dark background">
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Stonera Brand Identity Exploration &mdash; Prepared April 2026</p>
+    </footer>
+  </div>
+</body>
+</html>

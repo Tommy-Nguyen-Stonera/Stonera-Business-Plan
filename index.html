@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stonera Business Growth Plan - Tracker</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0A0A0A;
+      color: #E8E4DF;
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 1px solid #2C4A3E;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.4rem;
+      color: #F7F5F2;
+      margin-bottom: 8px;
+    }
+    .header p {
+      color: #8A8580;
+      font-size: 0.95rem;
+    }
+
+    /* Progress Overview */
+    .progress-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .progress-card {
+      background: #141414;
+      border: 1px solid #1E1E1E;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .progress-card.active {
+      border-color: #2C4A3E;
+      background: #0F1A16;
+    }
+    .progress-card.completed {
+      border-color: #3A7D5C;
+      background: #0F1A16;
+    }
+    .progress-card h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6B6560;
+      margin-bottom: 8px;
+    }
+    .progress-card .phase-name {
+      font-size: 1.1rem;
+      color: #F7F5F2;
+      margin-bottom: 12px;
+    }
+    .progress-bar {
+      height: 4px;
+      background: #1E1E1E;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-bar .fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .fill-green { background: #2C4A3E; }
+    .fill-bright { background: #3A7D5C; }
+    .progress-pct {
+      font-size: 0.8rem;
+      color: #8A8580;
+      margin-top: 6px;
+    }
+
+    /* Status badges */
+    .status {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .status-pending { background: #1E1E1E; color: #6B6560; }
+    .status-active { background: #1A2E25; color: #4CAF7D; }
+    .status-done { background: #0F2A1A; color: #3A7D5C; }
+    .status-blocked { background: #2A1A1A; color: #CF6679; }
+    .status-tommy { background: #2A2210; color: #D4A84B; }
+
+    /* Phase sections */
+    .phase {
+      background: #141414;
+      border: 1px solid #1E1E1E;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .phase.active { border-color: #2C4A3E; }
+    .phase-header {
+      padding: 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .phase-header:hover { background: #1A1A1A; }
+    .phase-header h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: #F7F5F2;
+    }
+    .phase-header .timeline {
+      color: #6B6560;
+      font-size: 0.85rem;
+    }
+    .phase-body {
+      padding: 0 24px 24px;
+    }
+
+    /* Task groups */
+    .task-group {
+      margin-bottom: 20px;
+    }
+    .task-group h3 {
+      font-size: 1rem;
+      color: #B8A48C;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #1E1E1E;
+    }
+
+    /* Tasks */
+    .task {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #0F0F0F;
+    }
+    .task:last-child { border-bottom: none; }
+    .task-check {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #2C4A3E;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .task-check.checked {
+      background: #2C4A3E;
+      border-color: #2C4A3E;
+    }
+    .task-check.checked::after {
+      content: '';
+      width: 6px;
+      height: 10px;
+      border: solid #F7F5F2;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-bottom: 2px;
+    }
+    .task-content { flex: 1; }
+    .task-title {
+      font-size: 0.95rem;
+      color: #E8E4DF;
+    }
+    .task-detail {
+      font-size: 0.8rem;
+      color: #6B6560;
+      margin-top: 4px;
+    }
+    .task-owner {
+      font-size: 0.7rem;
+      color: #8A8580;
+      margin-top: 4px;
+    }
+
+    /* Tools section */
+    .tools-section {
+      background: #141414;
+      border: 1px solid #1E1E1E;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .tools-section h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: #F7F5F2;
+      margin-bottom: 16px;
+    }
+    .tool-row {
+      display: grid;
+      grid-template-columns: 30px 1fr 100px 80px;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #0F0F0F;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    .tool-row:last-child { border-bottom: none; }
+    .tool-rank {
+      color: #2C4A3E;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .tool-name { color: #E8E4DF; }
+    .tool-cost { color: #8A8580; font-size: 0.8rem; }
+    .tool-phase { color: #6B6560; font-size: 0.8rem; }
+
+    /* Budget summary */
+    .budget {
+      background: #0F1A16;
+      border: 1px solid #2C4A3E;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .budget-item h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6B6560;
+      margin-bottom: 4px;
+    }
+    .budget-item .amount {
+      font-size: 1.3rem;
+      color: #F7F5F2;
+      font-weight: 600;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      font-size: 0.8rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.6rem; }
+      .tool-row { grid-template-columns: 30px 1fr 80px; }
+      .tool-phase { display: none; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>Stonera Business Growth Plan</h1>
+      <p>From word-of-mouth to 20+ jobs/week. Phase-by-phase execution tracker.</p>
+    </div>
+
+    <!-- Progress Overview -->
+    <div class="progress-overview">
+      <div class="progress-card active">
+        <h3>Phase 0</h3>
+        <div class="phase-name">Foundation</div>
+        <div class="progress-bar"><div class="fill fill-green" style="width: 0%"></div></div>
+        <div class="progress-pct">0% - Starting</div>
+      </div>
+      <div class="progress-card">
+        <h3>Phase 1</h3>
+        <div class="phase-name">Website</div>
+        <div class="progress-bar"><div class="fill fill-green" style="width: 0%"></div></div>
+        <div class="progress-pct">0% - Waiting</div>
+      </div>
+      <div class="progress-card">
+        <h3>Phase 2</h3>
+        <div class="phase-name">Lead Gen</div>
+        <div class="progress-bar"><div class="fill fill-green" style="width: 0%"></div></div>
+        <div class="progress-pct">0% - Waiting</div>
+      </div>
+      <div class="progress-card">
+        <h3>Phase 3</h3>
+        <div class="phase-name">Social</div>
+        <div class="progress-bar"><div class="fill fill-green" style="width: 0%"></div></div>
+        <div class="progress-pct">0% - Waiting</div>
+      </div>
+      <div class="progress-card">
+        <h3>Phase 4</h3>
+        <div class="phase-name">Automation</div>
+        <div class="progress-bar"><div class="fill fill-green" style="width: 0%"></div></div>
+        <div class="progress-pct">0% - Waiting</div>
+      </div>
+      <div class="progress-card">
+        <h3>Phase 5</h3>
+        <div class="phase-name">Scale</div>
+        <div class="progress-bar"><div class="fill fill-green" style="width: 0%"></div></div>
+        <div class="progress-pct">0% - Waiting</div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item"><span class="status status-active">Active</span> In progress now</div>
+      <div class="legend-item"><span class="status status-done">Done</span> Completed</div>
+      <div class="legend-item"><span class="status status-tommy">Tommy</span> Needs your action</div>
+      <div class="legend-item"><span class="status status-blocked">Blocked</span> Waiting on something</div>
+      <div class="legend-item"><span class="status status-pending">Pending</span> Not started</div>
+    </div>
+
+    <!-- Budget Summary -->
+    <div class="budget">
+      <div class="budget-item">
+        <h4>Monthly Fixed</h4>
+        <div class="amount">$19.80</div>
+      </div>
+      <div class="budget-item">
+        <h4>Google Ads (Phase 2)</h4>
+        <div class="amount">$600-900</div>
+      </div>
+      <div class="budget-item">
+        <h4>Total Monthly</h4>
+        <div class="amount">$640-940</div>
+      </div>
+      <div class="budget-item">
+        <h4>Break-even Target</h4>
+        <div class="amount">10 jobs/wk</div>
+      </div>
+    </div>
+
+    <!-- PHASE 0 -->
+    <div class="phase active">
+      <div class="phase-header" onclick="this.parentElement.querySelector('.phase-body').classList.toggle('hidden')">
+        <div>
+          <h2>Phase 0: Foundation and Research</h2>
+          <span class="status status-active">Active</span>
+        </div>
+        <div class="timeline">Weeks 1-2</div>
+      </div>
+      <div class="phase-body">
+
+        <div class="task-group">
+          <h3>0.1 Competitor Deep Dive</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Scrape and analyze top 10 Sydney stone fabricators</div>
+              <div class="task-detail">Royal Stone, Made in Stone, AUSKstone, Benchmark, Stone-Tech, etc.</div>
+              <div class="task-owner">Owner: Claude (subagents)</div>
+            </div>
+            <span class="status status-active">Active</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Compare homepage structure, quote forms, pricing positioning</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Page speed and Core Web Vitals comparison</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Content gap analysis - what competitors cover that Stonera doesn't</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Google Ads presence check - who's running ads and for what</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Deliver competitor comparison document for Tommy's review</div>
+              <div class="task-owner">Owner: Claude - needs Tommy approval before Phase 1</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <h3>0.2 Brand Refinement</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Audit current colors, fonts, tagline against competitors</div>
+              <div class="task-owner">Owner: Claude (brand + design skills)</div>
+            </div>
+            <span class="status status-active">Active</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Generate 2-3 logo options (text refined, text + icon, minimal)</div>
+              <div class="task-owner">Owner: Claude (design skill)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Create brand guidelines one-pager</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Tommy approves logo, colors, tagline, fonts</div>
+              <div class="task-owner">Owner: Tommy</div>
+            </div>
+            <span class="status status-tommy">Tommy</span>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <h3>0.3 Domain and Email</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Website already on Vercel for finetuning</div>
+              <div class="task-detail">Custom domain to be connected once site is ready</div>
+              <div class="task-owner">Owner: Tommy</div>
+            </div>
+            <span class="status status-done">Done</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Register stonera.com.au domain</div>
+              <div class="task-owner">Owner: Tommy</div>
+            </div>
+            <span class="status status-tommy">Tommy</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Set up Google Workspace ($19.80/mo) - tommy@stonera.com.au</div>
+              <div class="task-owner">Owner: Tommy</div>
+            </div>
+            <span class="status status-tommy">Tommy</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Update all website references from personal Gmail to business email</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-blocked">Blocked</span>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <h3>0.4 Google Business Profile Optimization</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Write optimized business description</div>
+              <div class="task-owner">Owner: Claude (humanizer skill)</div>
+            </div>
+            <span class="status status-active">Active</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Write all 8 service descriptions for GBP</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Select best 20-30 images for upload, organized by category</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Write first 3 GBP posts (project showcase, materials, process)</div>
+              <div class="task-owner">Owner: Claude</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Tommy uploads all content to GBP dashboard</div>
+              <div class="task-owner">Owner: Tommy</div>
+            </div>
+            <span class="status status-tommy">Tommy</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PHASE 1 -->
+    <div class="phase">
+      <div class="phase-header" onclick="this.parentElement.querySelector('.phase-body').classList.toggle('hidden')">
+        <div>
+          <h2>Phase 1: Website Optimization for Lead Conversion</h2>
+          <span class="status status-pending">Pending</span>
+        </div>
+        <div class="timeline">Weeks 3-6</div>
+      </div>
+      <div class="phase-body hidden">
+
+        <div class="task-group">
+          <h3>1.1 Infrastructure</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Clean up next.config.ts - remove basePath hack, enable image optimization</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Add GA4 + Google Search Console + Microsoft Clarity</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <h3>1.2 Multi-Step Quote Form</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Build 5-step quote form (customer type, project, stone, details, contact)</div>
+              <div class="task-detail">Hero placement: "Get a Quote in 60 Seconds"</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Connect form backend (Formspree free tier to start)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <h3>1.3 Homepage Restructure</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">New section order: Hero with form, Trust Bar, Services, Before/After, Social Proof, Projects, FAQ, CTA</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Build Before/After gallery with slider component</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Build FAQ section with schema markup for SEO</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <h3>1.4 New Pages</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">7 individual service pages with SEO-targeted H1s and filtered images</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Engineered stone ban alternatives guide page</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Stone benchtop cost guide for Sydney</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <h3>1.5 SEO Technical</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Add LocalBusiness, FAQPage, BreadcrumbList schema markup</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Auto-generate sitemap.xml and robots.txt</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Per-page unique title, description, H1 with target keywords</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="task-group">
+          <h3>1.6 Performance</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Lighthouse 90+ mobile on all pages</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase">
+      <div class="phase-header" onclick="this.parentElement.querySelector('.phase-body').classList.toggle('hidden')">
+        <div>
+          <h2>Phase 2: Lead Generation Engine</h2>
+          <span class="status status-pending">Pending</span>
+        </div>
+        <div class="timeline">Weeks 7-12</div>
+      </div>
+      <div class="phase-body hidden">
+        <div class="task-group">
+          <h3>2.1 Google Ads</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Set up Google Ads account with conversion tracking</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Campaign 1: High-intent search (kitchen benchtops, stone fabrication, stone quote Sydney)</div>
+              <div class="task-detail">$20-30/day budget, target cost-per-lead under $50</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Campaign 2: Competitor/alternative keywords (after 2 weeks data)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+        <div class="task-group">
+          <h3>2.2 Cold Email</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Build prospect list - builders and cabinet makers in Sydney</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Write 3-email sequence (intro, value prop, direct offer)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Set up n8n automation for email sends and tracking</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+        <div class="task-group">
+          <h3>2.3 Directories and Reviews</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Create Hipages + ServiceSeeking profiles</div>
+            </div>
+            <span class="status status-tommy">Tommy</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Free listings: TrueLocal, Yellow Pages, Oneflare, Houzz</div>
+            </div>
+            <span class="status status-tommy">Tommy</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Set up automated Google review request system (n8n + WhatsApp)</div>
+              <div class="task-detail">Target: 10+ genuine reviews in 60 days</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Launch referral program ($100 credit for trade referrals, $50 off for new clients)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase">
+      <div class="phase-header" onclick="this.parentElement.querySelector('.phase-body').classList.toggle('hidden')">
+        <div>
+          <h2>Phase 3: Social Media and Content</h2>
+          <span class="status status-pending">Pending</span>
+        </div>
+        <div class="timeline">Weeks 10-16</div>
+      </div>
+      <div class="phase-body hidden">
+        <div class="task-group">
+          <h3>3.1 Instagram</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Create @stonera.au Instagram Business account</div>
+            </div>
+            <span class="status status-tommy">Tommy</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Batch-create 12-15 launch posts from existing project images</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Design post templates with Stonera brand</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Content calendar: 3 posts/week (project, educational, behind-the-scenes)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+        <div class="task-group">
+          <h3>3.2 WhatsApp Business</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Switch to WhatsApp Business app with full profile</div>
+            </div>
+            <span class="status status-tommy">Tommy</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Create quick reply templates and auto-replies</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase">
+      <div class="phase-header" onclick="this.parentElement.querySelector('.phase-body').classList.toggle('hidden')">
+        <div>
+          <h2>Phase 4: Operations and Automation</h2>
+          <span class="status status-pending">Pending</span>
+        </div>
+        <div class="timeline">Weeks 14-20</div>
+      </div>
+      <div class="phase-body hidden">
+        <div class="task-group">
+          <h3>4.1 Job Management</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Set up ServiceM8 free tier (integrates with Xero)</div>
+              <div class="task-detail">Pipeline: Lead, Quoted, Accepted, Templated, Fabricating, Installing, Complete, Invoiced</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+        <div class="task-group">
+          <h3>4.2 n8n Automations</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Quote follow-up automation (confirmation + Tommy notification + reminders)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Review request automation (2-day delay after job complete + 1 follow-up)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Lead source tracking (log every lead with source, type, suburb, outcome)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Monthly reporting automation</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+        <div class="task-group">
+          <h3>4.3 Profit Tracking</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Track material cost, labor, revenue, net profit per job type</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase">
+      <div class="phase-header" onclick="this.parentElement.querySelector('.phase-body').classList.toggle('hidden')">
+        <div>
+          <h2>Phase 5: Scale and Optimize</h2>
+          <span class="status status-pending">Pending</span>
+        </div>
+        <div class="timeline">Week 20+</div>
+      </div>
+      <div class="phase-body hidden">
+        <div class="task-group">
+          <h3>Ongoing Optimization</h3>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">A/B test quote form variants (once 100+ visitors/week)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">SEO content expansion - 2 new pages/month (material guides, suburb pages)</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Google Ads optimization after 30/90 day data reviews</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+          <div class="task">
+            <div class="task-check" onclick="this.classList.toggle('checked')"></div>
+            <div class="task-content">
+              <div class="task-title">Expansion planning: first hire, capacity, new service areas</div>
+              <div class="task-detail">Trigger: consistently 20+ jobs/week</div>
+            </div>
+            <span class="status status-pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="tools-section">
+      <h2>Top 10 Tools (Priority Ranked)</h2>
+      <div class="tool-row" style="font-weight: 600; color: #6B6560; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">
+        <span>#</span><span>Tool</span><span>Cost</span><span>Phase</span>
+      </div>
+      <div class="tool-row"><span class="tool-rank">1</span><span class="tool-name">Google Business Profile</span><span class="tool-cost">Free</span><span class="tool-phase">Phase 0</span></div>
+      <div class="tool-row"><span class="tool-rank">2</span><span class="tool-name">Google Search Console</span><span class="tool-cost">Free</span><span class="tool-phase">Phase 1</span></div>
+      <div class="tool-row"><span class="tool-rank">3</span><span class="tool-name">Google Analytics 4</span><span class="tool-cost">Free</span><span class="tool-phase">Phase 1</span></div>
+      <div class="tool-row"><span class="tool-rank">4</span><span class="tool-name">Microsoft Clarity</span><span class="tool-cost">Free</span><span class="tool-phase">Phase 1</span></div>
+      <div class="tool-row"><span class="tool-rank">5</span><span class="tool-name">Vercel Hosting</span><span class="tool-cost">Free tier</span><span class="tool-phase">Phase 0</span></div>
+      <div class="tool-row"><span class="tool-rank">6</span><span class="tool-name">Formspree</span><span class="tool-cost">Free-$10/mo</span><span class="tool-phase">Phase 1</span></div>
+      <div class="tool-row"><span class="tool-rank">7</span><span class="tool-name">Google Ads</span><span class="tool-cost">$600-900/mo</span><span class="tool-phase">Phase 2</span></div>
+      <div class="tool-row"><span class="tool-rank">8</span><span class="tool-name">WhatsApp Business</span><span class="tool-cost">Free</span><span class="tool-phase">Phase 3</span></div>
+      <div class="tool-row"><span class="tool-rank">9</span><span class="tool-name">Instagram / Meta Business</span><span class="tool-cost">Free</span><span class="tool-phase">Phase 3</span></div>
+      <div class="tool-row"><span class="tool-rank">10</span><span class="tool-name">Google Workspace</span><span class="tool-cost">$19.80/mo</span><span class="tool-phase">Phase 0</span></div>
+    </div>
+
+  </div>
+
+  <script>
+    // Toggle phase sections
+    document.querySelectorAll('.hidden').forEach(el => {
+      el.style.display = 'none';
+    });
+    document.querySelectorAll('.phase-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const body = header.parentElement.querySelector('.phase-body');
+        if (body.style.display === 'none') {
+          body.style.display = 'block';
+        } else {
+          body.style.display = 'none';
+        }
+      });
+    });
+    // Phase 0 is open by default
+    document.querySelector('.phase.active .phase-body').style.display = 'block';
+  </script>
+
+</body>
+</html>
