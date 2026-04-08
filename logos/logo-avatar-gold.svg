@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Subtle circle background -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#D4A84B" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Diamond Icon - Gold - centered and larger -->
+  <g transform="translate(100, 100)">
+    <!-- Gold outline border -->
+    <polygon points="0,-55 55,0 0,55 -55,0" fill="#D4A84B"/>
+    <!-- Bottom-left dark half -->
+    <polygon points="0,-49 -49,0 0,49" fill="#1A1A1A"/>
+    <!-- Top-right gold half -->
+    <polygon points="0,-49 49,0 0,49" fill="#D4A84B"/>
+  </g>
+</svg>

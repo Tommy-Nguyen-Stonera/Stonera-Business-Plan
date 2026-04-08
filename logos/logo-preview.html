@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stonera Logo Concepts</title>
+  <title>Stonera Logo Comparison - Gold vs Green</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
@@ -13,7 +15,7 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #F7F5F2;
       color: #1A1A1A;
       line-height: 1.6;
@@ -22,204 +24,370 @@
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 60px 40px;
     }
 
-    header {
+    .page-header {
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 48px;
     }
 
-    header h1 {
+    .page-header h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: 2.5rem;
-      color: #2C4A3E;
-      margin-bottom: 8px;
+      font-size: 2.4rem;
       font-weight: 400;
+      color: #1A1A1A;
+      margin-bottom: 10px;
     }
 
-    header p {
-      font-size: 1rem;
-      color: #6B6560;
+    .page-header .subtitle {
+      font-size: 0.95rem;
       font-weight: 300;
+      color: #6B6560;
+      max-width: 520px;
+      margin: 0 auto;
     }
 
-    .concept {
+    .note {
+      background: #FFFFFF;
+      border-left: 3px solid #D4A84B;
+      padding: 20px 24px;
       margin-bottom: 56px;
-      background: white;
-      border-radius: 12px;
-      padding: 36px;
-      border: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.85rem;
+      color: #4A4540;
+      line-height: 1.75;
+      border-radius: 0 8px 8px 0;
     }
 
-    .concept h2 {
+    .note strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #1A1A1A;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .section-header h2 {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-      color: #2C4A3E;
-      margin-bottom: 6px;
+      font-size: 1.6rem;
       font-weight: 400;
     }
 
-    .concept .description {
-      font-size: 0.9rem;
-      color: #6B6560;
-      margin-bottom: 28px;
-      max-width: 640px;
+    .badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 14px;
+      border-radius: 100px;
     }
 
-    .preview-row {
+    .badge-gold {
+      background: #FDF6E9;
+      color: #B8903A;
+      border: 1px solid #D4A84B;
+    }
+
+    .badge-green {
+      background: #E8F0EC;
+      color: #2C4A3E;
+      border: 1px solid #2C4A3E;
+    }
+
+    .logo-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 20px;
     }
 
-    @media (max-width: 640px) {
-      .preview-row {
+    @media (max-width: 768px) {
+      .logo-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .preview-card {
-      border-radius: 8px;
-      padding: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 140px;
-      position: relative;
+    .logo-card {
+      background: #FFFFFF;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
     }
 
-    .preview-card::after {
-      content: attr(data-label);
-      position: absolute;
-      top: 10px;
-      right: 14px;
+    .card-label {
+      padding: 12px 16px;
       font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #6B6560;
+      border-bottom: 1px solid #F0EEEB;
+    }
+
+    .bg-label {
+      font-size: 0.6rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      opacity: 0.45;
+      padding: 6px 16px;
       font-weight: 500;
     }
 
-    .preview-light {
+    .bg-label.on-light {
+      background: #FAFAF8;
+      color: #A09A94;
+    }
+
+    .bg-label.on-dark {
+      background: #252525;
+      color: #555;
+    }
+
+    .logo-display {
+      padding: 28px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+    }
+
+    .logo-display.light {
       background: #F7F5F2;
-      border: 1px solid rgba(0,0,0,0.08);
     }
 
-    .preview-light::after {
-      color: #1A1A1A;
-    }
-
-    .preview-dark {
+    .logo-display.dark {
       background: #1A1A1A;
     }
 
-    .preview-dark::after {
-      color: #F7F5F2;
-    }
-
-    .preview-card img {
+    .logo-display img {
       max-width: 100%;
       height: auto;
       max-height: 80px;
     }
 
-    .preview-card.avatar img {
-      max-height: 120px;
+    .logo-display.avatar-display img {
+      max-height: 100px;
+      max-width: 100px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #E5E2DE;
+      margin: 48px 0;
+    }
+
+    .color-section {
+      margin-top: 20px;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .swatch-color {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .swatch-info .name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1A1A1A;
+    }
+
+    .swatch-info .hex {
+      font-size: 0.72rem;
+      color: #6B6560;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     }
 
     footer {
       text-align: center;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(0,0,0,0.08);
-    }
-
-    footer p {
-      font-size: 0.8rem;
-      color: #6B6560;
+      padding: 36px 0 0;
+      margin-top: 40px;
+      font-size: 0.78rem;
+      color: #A09A94;
+      border-top: 1px solid #E5E2DE;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1>Stonera Logo Concepts</h1>
-      <p>Stone fabrication in Sydney since 2001. Five directions for the visual identity.</p>
-    </header>
 
-    <!-- Concept A -->
-    <div class="concept">
-      <h2>Concept A: Modified O Wordmark</h2>
-      <p class="description">Clean serif wordmark where the letter O features a thin horizontal line through its center, evoking a stone slab cross-section. A decorative underline bar anchors the composition.</p>
-      <div class="preview-row">
-        <div class="preview-card preview-light" data-label="Light">
-          <img src="logo-concept-a.svg" alt="Stonera Logo Concept A on light background">
+    <div class="page-header">
+      <h1>Stonera Logo Comparison</h1>
+      <p class="subtitle">Gold (current) vs Green (proposed) brand direction for the diamond icon and STONERA wordmark.</p>
+    </div>
+
+    <div class="note">
+      <strong>Why consider green?</strong>
+      The gold version matches the current Stonera brand. The green version differentiates from competitors. No other Sydney stone fabricator uses green. Every major competitor (Avant Stone, WK Marble, SNB Stone, Universal Granite) uses gold or warm neutral tones. Green positions Stonera as immediately distinct in the market.
+    </div>
+
+    <!-- GOLD SECTION -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Current (Gold)</h2>
+        <span class="badge badge-gold">Existing</span>
+      </div>
+
+      <div class="logo-grid">
+        <div class="logo-card">
+          <div class="card-label">Primary Logo</div>
+          <div class="bg-label on-light">Light background</div>
+          <div class="logo-display light">
+            <img src="logo-original-refined.svg" alt="Stonera gold logo on light">
+          </div>
+          <div class="bg-label on-dark">Dark background</div>
+          <div class="logo-display dark">
+            <img src="logo-original-refined.svg" alt="Stonera gold logo on dark">
+          </div>
         </div>
-        <div class="preview-card preview-dark" data-label="Dark">
-          <img src="logo-concept-a.svg" alt="Stonera Logo Concept A on dark background">
+
+        <div class="logo-card">
+          <div class="card-label">With Tagline</div>
+          <div class="bg-label on-light">Light background</div>
+          <div class="logo-display light">
+            <img src="logo-with-tagline.svg" alt="Stonera gold logo with tagline on light">
+          </div>
+          <div class="bg-label on-dark">Dark background</div>
+          <div class="logo-display dark">
+            <img src="logo-with-tagline.svg" alt="Stonera gold logo with tagline on dark">
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="card-label">Avatar / Icon</div>
+          <div class="bg-label on-light">Light background</div>
+          <div class="logo-display light avatar-display">
+            <img src="logo-avatar-gold.svg" alt="Stonera gold avatar on light">
+          </div>
+          <div class="bg-label on-dark">Dark background</div>
+          <div class="logo-display dark avatar-display">
+            <img src="logo-avatar-gold.svg" alt="Stonera gold avatar on dark">
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Concept B -->
-    <div class="concept">
-      <h2>Concept B: Stacked Slabs Icon + Text</h2>
-      <p class="description">Three thin horizontal slabs stacked with slight rightward offsets sit beside the wordmark, referencing stone slabs leaning on a fabrication rack.</p>
-      <div class="preview-row">
-        <div class="preview-card preview-light" data-label="Light">
-          <img src="logo-concept-b.svg" alt="Stonera Logo Concept B on light background">
+    <div class="divider"></div>
+
+    <!-- GREEN SECTION -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Proposed (Green)</h2>
+        <span class="badge badge-green">New Direction</span>
+      </div>
+
+      <div class="logo-grid">
+        <div class="logo-card">
+          <div class="card-label">Primary Logo</div>
+          <div class="bg-label on-light">Light background</div>
+          <div class="logo-display light">
+            <img src="logo-green-variant.svg" alt="Stonera green logo on light">
+          </div>
+          <div class="bg-label on-dark">Dark background</div>
+          <div class="logo-display dark">
+            <img src="logo-green-variant.svg" alt="Stonera green logo on dark">
+          </div>
         </div>
-        <div class="preview-card preview-dark" data-label="Dark">
-          <img src="logo-concept-b.svg" alt="Stonera Logo Concept B on dark background">
+
+        <div class="logo-card">
+          <div class="card-label">With Tagline</div>
+          <div class="bg-label on-light">Light background</div>
+          <div class="logo-display light">
+            <img src="logo-green-tagline.svg" alt="Stonera green logo with tagline on light">
+          </div>
+          <div class="bg-label on-dark">Dark background</div>
+          <div class="logo-display dark">
+            <img src="logo-green-tagline.svg" alt="Stonera green logo with tagline on dark">
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="card-label">Avatar / Icon</div>
+          <div class="bg-label on-light">Light background</div>
+          <div class="logo-display light avatar-display">
+            <img src="logo-avatar-green.svg" alt="Stonera green avatar on light">
+          </div>
+          <div class="bg-label on-dark">Dark background</div>
+          <div class="logo-display dark avatar-display">
+            <img src="logo-avatar-green.svg" alt="Stonera green avatar on dark">
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Concept C -->
-    <div class="concept">
-      <h2>Concept C: Mitre Cut S Avatar Mark</h2>
-      <p class="description">A bold custom S with 45-degree mitre-cut terminals, set inside a circle. Designed to work as a social media avatar and brand mark at any size.</p>
-      <div class="preview-row">
-        <div class="preview-card preview-light avatar" data-label="Light">
-          <img src="logo-concept-c.svg" alt="Stonera Logo Concept C on light background">
-        </div>
-        <div class="preview-card preview-dark avatar" data-label="Dark">
-          <img src="logo-concept-c.svg" alt="Stonera Logo Concept C on dark background">
-        </div>
-      </div>
-    </div>
+    <div class="divider"></div>
 
-    <!-- Concept D -->
-    <div class="concept">
-      <h2>Concept D: Stone Edge Wordmark</h2>
-      <p class="description">Every letter stroke terminates with flat 45-degree angular cuts instead of traditional serifs, giving the typography a stone-cut character. Charcoal text with a veridian green accent line.</p>
-      <div class="preview-row">
-        <div class="preview-card preview-light" data-label="Light">
-          <img src="logo-concept-d.svg" alt="Stonera Logo Concept D on light background">
-        </div>
-        <div class="preview-card preview-dark" data-label="Dark">
-          <img src="logo-concept-d.svg" alt="Stonera Logo Concept D on dark background">
-        </div>
+    <!-- Color Reference -->
+    <div class="color-section">
+      <div class="section-header">
+        <h2>Color Reference</h2>
       </div>
-    </div>
-
-    <!-- Concept E -->
-    <div class="concept">
-      <h2>Concept E: Combined Brand Lockup</h2>
-      <p class="description">The Mitre Cut S mark paired with the full wordmark and tagline. This is the primary brand lockup for website headers, documents, and signage.</p>
-      <div class="preview-row">
-        <div class="preview-card preview-light" data-label="Light">
-          <img src="logo-concept-e.svg" alt="Stonera Logo Concept E on light background">
+      <div class="color-swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #1A1A1A;"></div>
+          <div class="swatch-info">
+            <div class="name">Primary Dark</div>
+            <div class="hex">#1A1A1A</div>
+          </div>
         </div>
-        <div class="preview-card preview-dark" data-label="Dark">
-          <img src="logo-concept-e.svg" alt="Stonera Logo Concept E on dark background">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #D4A84B;"></div>
+          <div class="swatch-info">
+            <div class="name">Gold Accent</div>
+            <div class="hex">#D4A84B</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #2C4A3E;"></div>
+          <div class="swatch-info">
+            <div class="name">Viridian Green</div>
+            <div class="hex">#2C4A3E</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #6B6560;"></div>
+          <div class="swatch-info">
+            <div class="name">Tagline Grey</div>
+            <div class="hex">#6B6560</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #F7F5F2;"></div>
+          <div class="swatch-info">
+            <div class="name">Light Background</div>
+            <div class="hex">#F7F5F2</div>
+          </div>
         </div>
       </div>
     </div>
 
     <footer>
-      <p>Stonera Brand Identity Exploration &mdash; Prepared April 2026</p>
+      <p>Stonera Brand Comparison &mdash; April 2026</p>
     </footer>
   </div>
 </body>
