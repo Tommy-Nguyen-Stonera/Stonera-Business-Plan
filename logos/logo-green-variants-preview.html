@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stonera Green Variants</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FAFAF8;
+      color: #1A1A1A;
+      padding: 60px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      color: #1A1A1A;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #777;
+      margin-bottom: 56px;
+      font-weight: 300;
+    }
+
+    .variant-card {
+      margin-bottom: 48px;
+      border-bottom: 1px solid #E8E5E0;
+      padding-bottom: 48px;
+    }
+
+    .variant-card:last-of-type {
+      border-bottom: none;
+    }
+
+    .variant-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .color-swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .variant-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+    }
+
+    .variant-hex {
+      font-size: 13px;
+      font-family: 'Inter', monospace;
+      color: #999;
+      font-weight: 400;
+    }
+
+    .variant-desc {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 24px;
+      margin-left: 36px;
+      font-weight: 300;
+    }
+
+    .logo-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .logo-bg {
+      flex: 1;
+      padding: 36px 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-bg img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
+
+    .bg-light {
+      background: #F7F5F2;
+      border: 1px solid #E8E5E0;
+    }
+
+    .bg-dark {
+      background: #1A1A1A;
+    }
+
+    /* Dark background needs inverted non-accent letters */
+    .bg-dark img {
+      filter: none;
+    }
+
+    .bg-label {
+      font-size: 11px;
+      color: #AAA;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .logo-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Diamond comparison section */
+    .diamond-section {
+      margin-top: 20px;
+      padding-top: 56px;
+      border-top: 1px solid #E8E5E0;
+    }
+
+    .diamond-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+
+    .diamond-row {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .diamond-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .diamond-label {
+      font-size: 12px;
+      color: #888;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .diamond-hex {
+      font-size: 11px;
+      color: #AAA;
+      font-family: 'Inter', monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stonera Green Variants</h1>
+  <p class="subtitle">6 accent color options for the Stonera logo, shown on light and dark backgrounds</p>
+
+  <!-- Veridian -->
+  <div class="variant-card">
+    <div class="variant-header">
+      <div class="color-swatch" style="background: #2C4A3E;"></div>
+      <span class="variant-name">Veridian</span>
+      <span class="variant-hex">#2C4A3E</span>
+    </div>
+    <p class="variant-desc">Deep forest green. The darkest, most reserved option. Communicates quiet authority and timeless craftsmanship.</p>
+    <div class="logo-row">
+      <div class="logo-col">
+        <div class="logo-bg bg-light">
+          <img src="logo-green-veridian.svg" alt="Stonera logo - Veridian on light">
+        </div>
+        <p class="bg-label">Light background</p>
+      </div>
+      <div class="logo-col">
+        <div class="logo-bg bg-dark">
+          <img src="logo-green-veridian.svg" alt="Stonera logo - Veridian on dark">
+        </div>
+        <p class="bg-label">Dark background</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emerald -->
+  <div class="variant-card">
+    <div class="variant-header">
+      <div class="color-swatch" style="background: #2E8B57;"></div>
+      <span class="variant-name">Emerald</span>
+      <span class="variant-hex">#2E8B57</span>
+    </div>
+    <p class="variant-desc">Rich jewel green. Communicates quality, value, and natural confidence. The most vibrant option.</p>
+    <div class="logo-row">
+      <div class="logo-col">
+        <div class="logo-bg bg-light">
+          <img src="logo-green-emerald.svg" alt="Stonera logo - Emerald on light">
+        </div>
+        <p class="bg-label">Light background</p>
+      </div>
+      <div class="logo-col">
+        <div class="logo-bg bg-dark">
+          <img src="logo-green-emerald.svg" alt="Stonera logo - Emerald on dark">
+        </div>
+        <p class="bg-label">Dark background</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sage -->
+  <div class="variant-card">
+    <div class="variant-header">
+      <div class="color-swatch" style="background: #7C9A72;"></div>
+      <span class="variant-name">Sage</span>
+      <span class="variant-hex">#7C9A72</span>
+    </div>
+    <p class="variant-desc">Muted, earthy green. Communicates a natural stone feel, approachable warmth, and understated taste.</p>
+    <div class="logo-row">
+      <div class="logo-col">
+        <div class="logo-bg bg-light">
+          <img src="logo-green-sage.svg" alt="Stonera logo - Sage on light">
+        </div>
+        <p class="bg-label">Light background</p>
+      </div>
+      <div class="logo-col">
+        <div class="logo-bg bg-dark">
+          <img src="logo-green-sage.svg" alt="Stonera logo - Sage on dark">
+        </div>
+        <p class="bg-label">Dark background</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hunter -->
+  <div class="variant-card">
+    <div class="variant-header">
+      <div class="color-swatch" style="background: #355E3B;"></div>
+      <span class="variant-name">Hunter</span>
+      <span class="variant-hex">#355E3B</span>
+    </div>
+    <p class="variant-desc">Traditional establishment green. Communicates seriousness, reliability, and professional trust.</p>
+    <div class="logo-row">
+      <div class="logo-col">
+        <div class="logo-bg bg-light">
+          <img src="logo-green-hunter.svg" alt="Stonera logo - Hunter on light">
+        </div>
+        <p class="bg-label">Light background</p>
+      </div>
+      <div class="logo-col">
+        <div class="logo-bg bg-dark">
+          <img src="logo-green-hunter.svg" alt="Stonera logo - Hunter on dark">
+        </div>
+        <p class="bg-label">Dark background</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teal -->
+  <div class="variant-card">
+    <div class="variant-header">
+      <div class="color-swatch" style="background: #2A6F6F;"></div>
+      <span class="variant-name">Teal</span>
+      <span class="variant-hex">#2A6F6F</span>
+    </div>
+    <p class="variant-desc">Modern blue-green. Communicates distinction, forward thinking, and a contemporary edge.</p>
+    <div class="logo-row">
+      <div class="logo-col">
+        <div class="logo-bg bg-light">
+          <img src="logo-green-teal.svg" alt="Stonera logo - Teal on light">
+        </div>
+        <p class="bg-label">Light background</p>
+      </div>
+      <div class="logo-col">
+        <div class="logo-bg bg-dark">
+          <img src="logo-green-teal.svg" alt="Stonera logo - Teal on dark">
+        </div>
+        <p class="bg-label">Dark background</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Olive -->
+  <div class="variant-card">
+    <div class="variant-header">
+      <div class="color-swatch" style="background: #4A5D23;"></div>
+      <span class="variant-name">Dark Olive</span>
+      <span class="variant-hex">#4A5D23</span>
+    </div>
+    <p class="variant-desc">Earthy, grounded green. Communicates natural materials, organic quality, and down-to-earth reliability.</p>
+    <div class="logo-row">
+      <div class="logo-col">
+        <div class="logo-bg bg-light">
+          <img src="logo-green-olive.svg" alt="Stonera logo - Olive on light">
+        </div>
+        <p class="bg-label">Light background</p>
+      </div>
+      <div class="logo-col">
+        <div class="logo-bg bg-dark">
+          <img src="logo-green-olive.svg" alt="Stonera logo - Olive on dark">
+        </div>
+        <p class="bg-label">Dark background</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diamond Comparison -->
+  <div class="diamond-section">
+    <h2>Diamond Icon Comparison</h2>
+    <div class="diamond-row">
+
+      <div class="diamond-item">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <g transform="translate(28, 28)">
+            <polygon points="0,-24 24,0 0,24 -24,0" fill="#2C4A3E"/>
+            <polygon points="0,-21 -21,0 0,21" fill="#1A1A1A"/>
+            <polygon points="0,-21 21,0 0,21" fill="#2C4A3E"/>
+          </g>
+        </svg>
+        <span class="diamond-label">Veridian</span>
+        <span class="diamond-hex">#2C4A3E</span>
+      </div>
+
+      <div class="diamond-item">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <g transform="translate(28, 28)">
+            <polygon points="0,-24 24,0 0,24 -24,0" fill="#2E8B57"/>
+            <polygon points="0,-21 -21,0 0,21" fill="#1A1A1A"/>
+            <polygon points="0,-21 21,0 0,21" fill="#2E8B57"/>
+          </g>
+        </svg>
+        <span class="diamond-label">Emerald</span>
+        <span class="diamond-hex">#2E8B57</span>
+      </div>
+
+      <div class="diamond-item">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <g transform="translate(28, 28)">
+            <polygon points="0,-24 24,0 0,24 -24,0" fill="#7C9A72"/>
+            <polygon points="0,-21 -21,0 0,21" fill="#1A1A1A"/>
+            <polygon points="0,-21 21,0 0,21" fill="#7C9A72"/>
+          </g>
+        </svg>
+        <span class="diamond-label">Sage</span>
+        <span class="diamond-hex">#7C9A72</span>
+      </div>
+
+      <div class="diamond-item">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <g transform="translate(28, 28)">
+            <polygon points="0,-24 24,0 0,24 -24,0" fill="#355E3B"/>
+            <polygon points="0,-21 -21,0 0,21" fill="#1A1A1A"/>
+            <polygon points="0,-21 21,0 0,21" fill="#355E3B"/>
+          </g>
+        </svg>
+        <span class="diamond-label">Hunter</span>
+        <span class="diamond-hex">#355E3B</span>
+      </div>
+
+      <div class="diamond-item">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <g transform="translate(28, 28)">
+            <polygon points="0,-24 24,0 0,24 -24,0" fill="#2A6F6F"/>
+            <polygon points="0,-21 -21,0 0,21" fill="#1A1A1A"/>
+            <polygon points="0,-21 21,0 0,21" fill="#2A6F6F"/>
+          </g>
+        </svg>
+        <span class="diamond-label">Teal</span>
+        <span class="diamond-hex">#2A6F6F</span>
+      </div>
+
+      <div class="diamond-item">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <g transform="translate(28, 28)">
+            <polygon points="0,-24 24,0 0,24 -24,0" fill="#4A5D23"/>
+            <polygon points="0,-21 -21,0 0,21" fill="#1A1A1A"/>
+            <polygon points="0,-21 21,0 0,21" fill="#4A5D23"/>
+          </g>
+        </svg>
+        <span class="diamond-label">Dark Olive</span>
+        <span class="diamond-hex">#4A5D23</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
